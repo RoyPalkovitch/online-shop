@@ -1,7 +1,7 @@
 import { LinkedNode } from "./Node";
 
 
-class LinkedList {
+export class LinkedList {
   head: LinkedNode;
   tail: LinkedNode;
   constructor(head: LinkedNode) {
@@ -35,6 +35,27 @@ class LinkedList {
     linkedNode.prev = tempHead;
     tempHead.next = linkedNode;
     this.setTail();
+  }
+
+  removeLinkedNode(linkedNode: LinkedNode) {
+    if (linkedNode === this.head) {
+      this.head = this.head.next;
+      this.head.prev = null;
+      return;
+    }
+
+    if (this.tail === linkedNode) {
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+      return;
+    }
+
+    let tempHead = this.head;
+    while (tempHead.next != linkedNode) {
+      tempHead = tempHead.next;
+    }
+    tempHead.next = tempHead.next.next
+    tempHead.next.prev = tempHead;
   }
 
 }
