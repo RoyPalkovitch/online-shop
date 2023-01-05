@@ -1,14 +1,16 @@
+import { link } from "fs";
 import { LinkedNode } from "./Node";
 
 
 export class LinkedList {
-  head: LinkedNode;
-  tail: LinkedNode;
+  private head: LinkedNode;
+  private tail: LinkedNode;
+
   constructor(head: LinkedNode) {
     this.head = head;
     this.tail = head;
-
   }
+
   getLength() {
     let tempHead = this.head;
     let counter = 1;
@@ -19,22 +21,25 @@ export class LinkedList {
     return counter;
   }
 
-  setTail() {
-    let tempHead = this.head;
-    while (tempHead.next !== null) {
-      tempHead = tempHead.next;
-    }
-    this.tail = tempHead;
+  getHead() {
+    return this.head;
   }
 
+  getTail() {
+    return this.tail;
+  }
+
+  setHead(linkedNode: LinkedNode) {
+    linkedNode.next = this.head;
+    this.head.prev = linkedNode;
+    this.head = linkedNode;
+  }
+
+
   addLinkedNode(linkedNode: LinkedNode) {
-    let tempHead = this.head;
-    while (tempHead.next !== null) {
-      tempHead = tempHead.next;
-    }
-    linkedNode.prev = tempHead;
-    tempHead.next = linkedNode;
-    this.setTail();
+    linkedNode.prev = this.tail;
+    this.tail.next = linkedNode;
+    this.tail = linkedNode;
   }
 
   removeLinkedNode(linkedNode: LinkedNode) {
