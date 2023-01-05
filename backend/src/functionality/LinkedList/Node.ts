@@ -1,13 +1,15 @@
 import { LinkedList } from "./LinkedList";
 
 export class LinkedNode {
-  parentRef: LinkedList | null;
   next: LinkedNode | null;
   prev: LinkedNode | null;
+  parentRef: LinkedList;
+  key: number;
   data: unknown;
-  constructor(next: LinkedNode | null = null, prev: LinkedNode | null = null, data: unknown) {
-    this.next = next;
-    this.prev = prev;
+  constructor(data: unknown) {
+    this.next = null;
+    this.prev = null;
+    this.parentRef = null;
     this.data = data;
   }
 }
