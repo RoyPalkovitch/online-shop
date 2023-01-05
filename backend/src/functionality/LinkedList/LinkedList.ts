@@ -1,66 +1,67 @@
-import { link } from "fs";
 import { LinkedNode } from "./Node";
 
 
 export class LinkedList {
   private head: LinkedNode;
   private tail: LinkedNode;
-
+  length: number;
   constructor(head: LinkedNode) {
     this.head = head;
     this.tail = head;
   }
 
-  getLength() {
-    let tempHead = this.head;
-    let counter = 1;
-    while (tempHead !== null) {
-      tempHead = tempHead.next;
-      counter++;
-    }
-    return counter;
-  }
-
-  getHead() {
+  getHead(): LinkedNode {
     return this.head;
   }
 
-  getTail() {
+  getTail(): LinkedNode {
     return this.tail;
   }
 
-  setHead(linkedNode: LinkedNode) {
+  setHead(linkedNode: LinkedNode): void {
     linkedNode.next = this.head;
     this.head.prev = linkedNode;
     this.head = linkedNode;
+    this.length++;
   }
 
 
-  addLinkedNode(linkedNode: LinkedNode) {
+  addLinkedNode(linkedNode: LinkedNode): void {
     linkedNode.prev = this.tail;
     this.tail.next = linkedNode;
     this.tail = linkedNode;
+    this.length++;
   }
 
-  removeLinkedNode(linkedNode: LinkedNode) {
+  removeLinkedNode(linkedNode: LinkedNode): boolean {
     if (linkedNode === this.head) {
       this.head = this.head.next;
       this.head.prev = null;
-      return;
+      this.length--;
+      return true;
     }
 
     if (this.tail === linkedNode) {
       this.tail = this.tail.prev;
       this.tail.next = null;
-      return;
+      this.length--;
+
+      return true;
     }
 
     let tempHead = this.head;
-    while (tempHead.next != linkedNode) {
+
+    while (tempHead.next !== linkedNode || tempHead === null) {
       tempHead = tempHead.next;
     }
+
+    if (tempHead === null) {
+      return false;
+    }
+
     tempHead.next = tempHead.next.next
     tempHead.next.prev = tempHead;
+    this.length--;
   }
 
 }
