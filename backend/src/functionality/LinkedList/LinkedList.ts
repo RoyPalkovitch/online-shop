@@ -8,6 +8,7 @@ export class LinkedList {
   constructor(head: LinkedNode) {
     this.head = head;
     this.tail = head;
+    head.parentRef = this;
   }
 
   getHead(): LinkedNode {
@@ -27,41 +28,37 @@ export class LinkedList {
 
 
   addLinkedNode(linkedNode: LinkedNode): void {
+    linkedNode.parentRef = this;
     linkedNode.prev = this.tail;
     this.tail.next = linkedNode;
     this.tail = linkedNode;
     this.length++;
   }
 
-  removeLinkedNode(linkedNode: LinkedNode): boolean {
+  removeLinkedNode(linkedNode: LinkedNode): void {
+    if (linkedNode.parentRef !== this) {
+      return;
+    }
+
     if (linkedNode === this.head) {
       this.head = this.head.next;
       this.head.prev = null;
       this.length--;
-      return true;
+      return;
     }
 
     if (this.tail === linkedNode) {
       this.tail = this.tail.prev;
       this.tail.next = null;
       this.length--;
+      return;
 
-      return true;
     }
-
-    let tempHead = this.head;
-
-    while (tempHead.next !== linkedNode || tempHead === null) {
-      tempHead = tempHead.next;
-    }
-
-    if (tempHead === null) {
-      return false;
-    }
-
-    tempHead.next = tempHead.next.next
-    tempHead.next.prev = tempHead;
+    linkedNode.prev = linkedNode.next;
     this.length--;
+    return;
+
+
   }
 
 }

@@ -1,4 +1,7 @@
+import { LinkedList } from "./LinkedList";
+
 export class LinkedNode {
+  parentRef: LinkedList | null;
   next: LinkedNode | null;
   prev: LinkedNode | null;
   data: unknown;
