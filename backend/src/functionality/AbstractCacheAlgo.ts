@@ -1,8 +1,7 @@
 import { ICacheAlgo } from "./ICacheAlgo";
 import { LinkedList } from "./LinkedList/LinkedList";
-import { LinkedNode } from "./LinkedList/Node";
 
-abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
+export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
 
   private linkedList: LinkedList<K, V>;
   private maxCapacity: number;

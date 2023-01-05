@@ -86,40 +86,40 @@ export class LinkedList<K, V> {
 }
 
 
-const node_1 = new LinkedNode<number, number>(1, 10);
-const node_2 = new LinkedNode<number, number>(2, 11);
-const node_3 = new LinkedNode<number, number>(3, 12);
-const node_4 = new LinkedNode<number, number>(4, 13);
-const node_5 = new LinkedNode<number, number>(5, 14);
-const node_6 = new LinkedNode<number, number>(6, 17);
+// const node_1 = new LinkedNode<number, number>(1, 10);
+// const node_2 = new LinkedNode<number, number>(2, 11);
+// const node_3 = new LinkedNode<number, number>(3, 12);
+// const node_4 = new LinkedNode<number, number>(4, 13);
+// const node_5 = new LinkedNode<number, number>(5, 14);
+// const node_6 = new LinkedNode<number, number>(6, 17);
 
-const linked = new LinkedList(node_1);
-linked.addLinkedNode(node_2);
-linked.addLinkedNode(node_3);
-linked.addLinkedNode(node_4);
-linked.addLinkedNode(node_5);
+// const linked = new LinkedList(node_1);
+// linked.addLinkedNode(node_2);
+// linked.addLinkedNode(node_3);
+// linked.addLinkedNode(node_4);
+// linked.addLinkedNode(node_5);
 
-let counter = 1;
-while (linked.getLinkedNode(counter)) {
-  console.log(linked.getLinkedNode(counter).data);
-  counter++;
-}
-console.log('-----------------------');
+// let counter = 1;
+// while (linked.getLinkedNode(counter)) {
+//   console.log(linked.getLinkedNode(counter).data);
+//   counter++;
+// }
+// console.log('-----------------------');
 
-console.log(node_5.key);
+// console.log(node_5.key);
 
-console.log('-----------------------');
+// console.log('-----------------------');
 
-linked.addToHead(node_6);
-linked.addToHead(node_5);
-console.log(node_6.key);
-console.log(node_5.key);
-console.log('-----------------------');
+// linked.addToHead(node_6);
+// linked.addToHead(node_5);
+// console.log(node_6.key);
+// console.log(node_5.key);
+// console.log('-----------------------');
 
-counter = 1;
-while (linked.getLinkedNode(counter)) {
-  console.log(linked.getLinkedNode(counter).data);
-  counter++;
-}
+// counter = 1;
+// while (linked.getLinkedNode(counter)) {
+//   console.log(linked.getLinkedNode(counter).data);
+//   counter++;
+// }
 
 
