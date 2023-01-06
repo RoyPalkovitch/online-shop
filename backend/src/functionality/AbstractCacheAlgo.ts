@@ -23,6 +23,9 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
     if (!this.linkedList) {
       throw Error('Please set cache before using remove');
     }
+    if (!this.linkedList.nodesDict.has(key)) {
+      throw Error('Key does not exist in cache');
+    }
     const nodeToRemove = this.linkedList.getLinkedNode(key);
     return this.linkedList.removeLinkedNode(nodeToRemove)
   }
