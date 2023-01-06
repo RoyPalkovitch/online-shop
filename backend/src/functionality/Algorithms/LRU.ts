@@ -31,7 +31,9 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
     if (!getNode) {
       return;
     }
-    this.linkedList.addToHead(getNode);
+    if (getNode !== this.linkedList.getHead()) {
+      this.linkedList.addToHead(getNode);
+    }
     return getNode.data;
   }
 

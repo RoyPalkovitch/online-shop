@@ -42,6 +42,7 @@ export class LinkedList<K, V> {
   }
 
   addToHead(linkedNode: LinkedNode<K, V>): void {
+
     if (linkedNode.parentRef && linkedNode.parentRef !== this) {
       throw Error('item is in another list');
     }
