@@ -23,8 +23,12 @@ export class LinkedList<K, V> {
     return this.tail;
   }
 
-  getLinkedNode(key: K): LinkedNode<K, V> {
-    return this.nodesDict.get(key);
+  getLinkedNode(key: K): LinkedNode<K, V> | undefined {
+    const getNode = this.nodesDict.get(key);
+    if (!getNode) {
+      return undefined;
+    }
+    return getNode
   }
 
   addToHead(linkedNode: LinkedNode<K, V>): void {

@@ -9,17 +9,17 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
 
   setElement(key: K, value: V): K {
     const newNode = new LinkedNode(key, value);
+    if (!this.linkedList) {
+      this.linkedList = new LinkedList(newNode);
+      return key
+    }
+
     if (this.maxCapacity === this.linkedList.length) {
       this.removeElement(this.linkedList.getTail().key);
     }
 
-    if (!this.linkedList) {
-      this.linkedList = new LinkedList(newNode);
-    }
-    else {
+    this.linkedList.addToHead(newNode);
 
-      this.linkedList.addToHead(newNode);
-    }
     return key
   }
 
@@ -29,7 +29,7 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
     }
     const getNode = this.linkedList.getLinkedNode(key);
     if (!getNode) {
-      return; // need to move this to LinkedList class
+      return;
     }
     this.linkedList.removeLinkedNode(getNode);
     this.linkedList.addToHead(getNode);

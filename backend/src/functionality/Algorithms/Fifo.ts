@@ -4,13 +4,13 @@ import { LinkedList } from "functionality/LinkedList/LinkedList";
 import { LinkedNode } from "functionality/LinkedList/Node";
 
 
-export class FIFOcache<K,V> extends AbstractCacheAlgo<K,V> implements ICacheAlgo<K,V> {
-   
+export class FIFOcache<K, V> extends AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V> {
+
     constructor(maxCapacity: number) {
         super(maxCapacity);
     }
 
-    
+
 
     setElement(key: K, value: V): K {
         const node = new LinkedNode(key, value);
@@ -20,19 +20,16 @@ export class FIFOcache<K,V> extends AbstractCacheAlgo<K,V> implements ICacheAlgo
             return key;
         }
 
-        if (this.maxCapacity >= this.linkedList.length) {
-            this.linkedList.addLinkedNode(node);
-            return key;
-        }
-        else {
+        if (this.maxCapacity === this.linkedList.length) {
             const head = this.linkedList.getHead();
             this.removeElement(head.key);
-            this.linkedList.addLinkedNode(node);
-            return key;
         }
 
+        this.linkedList.addLinkedNode(node);
+        return key;
+
     }
-        
-    
-    
+
+
+
 }
