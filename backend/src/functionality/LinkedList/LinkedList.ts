@@ -36,7 +36,7 @@ export class LinkedList<K, V> {
     }
     const getNode = this.nodesDict.get(key);
     if (!getNode) {
-      throw Error('items is not in the list');
+      throw Error('item is not in the list');
     }
     return getNode
   }
