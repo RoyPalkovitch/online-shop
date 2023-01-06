@@ -1,3 +1,4 @@
+import { link } from "fs";
 import { LinkedNode } from "./Node";
 
 
@@ -16,27 +17,38 @@ export class LinkedList<K, V> {
   }
 
   getHead(): LinkedNode<K, V> {
+    if (this.length === 0) {
+      throw Error('list got not head');
+    }
     return this.head;
   }
 
   getTail(): LinkedNode<K, V> {
+    if (this.length === 0) {
+      throw Error('list got not tail');
+    }
     return this.tail;
   }
 
-  getLinkedNode(key: K): LinkedNode<K, V> | undefined {
+  getLinkedNode(key: K): LinkedNode<K, V> {
+    if (this.length === 0) {
+      throw Error('list got not items');
+    }
     const getNode = this.nodesDict.get(key);
     if (!getNode) {
-      return undefined;
+      throw Error('items is not in the list');
     }
     return getNode
   }
 
   addToHead(linkedNode: LinkedNode<K, V>): void {
     if (linkedNode.parentRef && linkedNode.parentRef !== this) {
-      return;
+      throw Error('item is in another list');
     }
-    if (linkedNode.parentRef === this) {
+    else if (linkedNode.parentRef === this) {
       this.removeLinkedNode(linkedNode);
+    } else {
+      linkedNode.parentRef = this;
     }
 
     this.length++;
@@ -57,11 +69,21 @@ export class LinkedList<K, V> {
   }
 
   removeLinkedNode(linkedNode: LinkedNode<K, V>): boolean {
+
+    if (this.length === 0) {
+      throw Error('no more nodes to remove');
+    }
     if (linkedNode.parentRef !== this) {
       return false;
     }
 
     this.nodesDict.delete(linkedNode.key);
+    if (this.length <= 1) {
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return true;
+    }
 
     if (linkedNode === this.head) {
       this.head = this.head.next;
@@ -75,13 +97,10 @@ export class LinkedList<K, V> {
       this.tail.next = null;
       this.length--;
       return true;
-
     }
+    linkedNode.prev.next = linkedNode.next;
+    linkedNode.next.prev = linkedNode.prev;
 
-    const prev = linkedNode.prev;
-    const next = linkedNode.next
-    prev.next = next;
-    next.prev = prev;
     this.length--;
     return true;
 
@@ -118,7 +137,26 @@ export class LinkedList<K, V> {
 // linked.addToHead(node_5);
 // console.log(node_6.key);
 // console.log(node_5.key);
+
 // console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_3));
+// console.log(linked.getHead().key);
+// console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_6));
+// console.log(linked.getHead().key);
+// console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_1));
+// console.log(linked.getHead().key);
+// console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_5));
+// console.log(linked.getHead().key);
+// console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_2));
+// console.log(linked.getHead().key);
+// console.log('-----------------------');
+// console.log(linked.removeLinkedNode(node_4));
+// console.log(linked.length);
+//console.log(linked.getHead().key);
 
 // counter = 1;
 // while (linked.getLinkedNode(counter)) {

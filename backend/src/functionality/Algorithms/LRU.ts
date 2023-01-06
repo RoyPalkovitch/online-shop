@@ -1,6 +1,6 @@
-import { AbstractCacheAlgo } from "functionality/AbstractCacheAlgo";
-import { LinkedList } from "functionality/LinkedList/LinkedList";
-import { LinkedNode } from "functionality/LinkedList/Node";
+import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
+import { LinkedList } from "../LinkedList/LinkedList";
+import { LinkedNode } from "../LinkedList/Node";
 
 export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
   constructor(maxCap: number) {
@@ -14,11 +14,11 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
       return key
     }
 
-    if (this.maxCapacity === this.linkedList.length) {
+    this.linkedList.addToHead(newNode);
+
+    if (this.maxCapacity < this.linkedList.length) {
       this.removeElement(this.linkedList.getTail().key);
     }
-
-    this.linkedList.addToHead(newNode);
 
     return key
   }
@@ -31,9 +31,53 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
     if (!getNode) {
       return;
     }
-    this.linkedList.removeLinkedNode(getNode);
     this.linkedList.addToHead(getNode);
     return getNode.data;
   }
 
 }
+
+
+
+
+// const lruCache = new LRUCache<number, number>(3);
+// console.log(lruCache.setElement(1, 11));
+// console.log('-----------------------');
+// console.log(lruCache.setElement(2, 12));
+// console.log('-----------------------');
+// console.log(lruCache.setElement(3, 13));
+// console.log(lruCache.getElement(3));
+// console.log('-----------------------');
+
+// let counter = 1;
+// try {
+//   while (lruCache.getElement(counter)) {
+//     console.log(lruCache.getElement(counter));
+//     counter++;
+//   }
+// }
+// catch {
+
+// }
+// console.log('-----------------------');
+// console.log(lruCache.setElement(4, 14));
+// console.log('-----------------------');
+// console.log(lruCache.setElement(5, 15));
+// console.log('-----------------------');
+// console.log(lruCache.setElement(6, 16));
+// //console.log(lruCache.getElement(3));
+// console.log('-----------------------');
+
+
+// while (lruCache.getElement(counter)) {
+//   console.log(lruCache.getElement(counter));
+//   counter++;
+// }
+// // lruCache.setElement(4, 13);
+
+
+// // while (lruCache.getElement(counter)) {
+// //   console.log(lruCache.getElement(counter));
+// //   counter++;
+// // }
+// console.log('-----------------------');
