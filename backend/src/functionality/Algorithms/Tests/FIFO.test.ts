@@ -21,7 +21,7 @@ describe("Testing FIFO", () => {
         fifo.setElement(1, 'b');
         expect(fifo.getElement(1)).toBe('b');
     });
-    test("FIFO - setElement - same key wice in a row followed by removing and getting", () => {
+    test("FIFO - setElement - same key twice in a row followed by removing and getting", () => {
         const fifo = new FIFOcache<Number, String>(3);
         fifo.setElement(1, 'a');
         fifo.setElement(1, 'b');
