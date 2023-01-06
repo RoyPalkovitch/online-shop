@@ -25,7 +25,7 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
 
   getElement(key: K): V {
     if (!this.linkedList) {
-      return;
+      throw Error('Please set cache before using get');
     }
     const getNode = this.linkedList.getLinkedNode(key);
     if (!getNode) {
