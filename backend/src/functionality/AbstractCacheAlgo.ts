@@ -3,8 +3,8 @@ import { LinkedList } from "./LinkedList/LinkedList";
 
 export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
 
-  private linkedList: LinkedList<K, V>;
-  private maxCapacity: number;
+  linkedList: LinkedList<K, V>;
+  maxCapacity: number;
   constructor(maxCap: number) {
     this.maxCapacity = maxCap;
   }
