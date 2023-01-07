@@ -1,10 +1,15 @@
 import { ICacheAlgo } from "./ICacheAlgo";
 import { LinkedList } from "./LinkedList/LinkedList";
+import { LinkedNode } from "./LinkedList/Node";
 
 export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
 
   protected linkedList: LinkedList<K, V>;
   protected maxCapacity: number;
+  protected abstract maxCapLogic(): void;
+  protected abstract pushToCorrectPlace(node: LinkedNode<K, V>): void;
+
+
   constructor(maxCap: number) {
     this.maxCapacity = maxCap;
   }
@@ -16,8 +21,17 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
     return this.linkedList.getLinkedNode(key).data;
   }
 
-  //might change to void
-  abstract setElement(key: K, value: V): K;
+  setElement(key: K, value: V): K {
+    const node = new LinkedNode(key, value);
+    if (!this.linkedList) {
+      this.linkedList = new LinkedList(node);
+      return key;
+    }
+    if (this.maxCapacity < this.linkedList.length + 1) {
+      this.maxCapLogic();
+    }
+    this.pushToCorrectPlace(node);
+  }
 
   removeElement(key: K): boolean {
     if (!this.linkedList) {
@@ -29,5 +43,4 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
     const nodeToRemove = this.linkedList.getLinkedNode(key);
     return this.linkedList.removeLinkedNode(nodeToRemove)
   }
-
 }
