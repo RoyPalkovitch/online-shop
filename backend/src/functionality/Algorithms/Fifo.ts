@@ -1,6 +1,5 @@
 import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
 import { ICacheAlgo } from "../ICacheAlgo";
-import { LinkedList } from "../LinkedList/LinkedList";
 import { LinkedNode } from "../LinkedList/Node";
 
 
@@ -10,19 +9,15 @@ export class FIFOcache<K, V> extends AbstractCacheAlgo<K, V> implements ICacheAl
         super(maxCapacity);
     }
 
-    setElement(key: K, value: V): K {
-        const node = new LinkedNode(key, value);
-
-        if (!this.linkedList) {
-            this.linkedList = new LinkedList(node);
-            return key;
-        }
-
+    maxCapLogic(): void {
+        const head = this.linkedList.getHead();
+        this.removeElement(head.key);
+    };
+    pushToCorrectPlace(node: LinkedNode<K, V>): void {
         this.linkedList.addLinkedNode(node);
-        if (this.maxCapacity < this.linkedList.length) {
-            const head = this.linkedList.getHead();
-            this.removeElement(head.key);
-        }
+    }
+    setElement(key: K, value: V): K {
+        super.setElement(key, value);
         return key;
     }
 }

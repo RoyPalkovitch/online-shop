@@ -1,27 +1,22 @@
 import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
-import { LinkedList } from "../LinkedList/LinkedList";
 import { LinkedNode } from "../LinkedList/Node";
 
 export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
   constructor(maxCap: number) {
     super(maxCap);
   }
+  maxCapLogic(): void {
+    this.removeElement(this.linkedList.getTail().key);
+  };
+
+  pushToCorrectPlace(node: LinkedNode<K, V>): void {
+    this.linkedList.addToHead(node);
+  };
 
   setElement(key: K, value: V): K {
-    const newNode = new LinkedNode(key, value);
-    if (!this.linkedList) {
-      this.linkedList = new LinkedList(newNode);
-      return key
-    }
-
-    this.linkedList.addToHead(newNode);
-
-    if (this.maxCapacity < this.linkedList.length) {
-      this.removeElement(this.linkedList.getTail().key);
-    }
-
-    return key
-  }
+    super.setElement(key, value);
+    return key;
+  };
 
   getElement(key: K): V {
     if (!this.linkedList) {
@@ -35,6 +30,6 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
       this.linkedList.addToHead(getNode);
     }
     return getNode.data;
-  }
+  };
 
 }
