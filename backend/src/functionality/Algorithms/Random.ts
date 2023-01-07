@@ -21,36 +21,3 @@ export class RandomCache<K, V> extends AbstractCacheAlgo<K, V>{
     return key;
   }
 }
-
-
-
-// const randomCache = new RandomCache<number, number>(3);
-// console.log(randomCache.setElement(1, 11));
-// console.log('-----------------------');
-// console.log(randomCache.setElement(2, 12));
-// console.log('-----------------------');
-// console.log(randomCache.setElement(3, 13));
-// console.log(randomCache.getElement(3));
-// console.log('-----------------------');
-// let counter = 1;
-// try {
-//   while (randomCache.getElement(counter)) {
-//     console.log(randomCache.getElement(counter));
-//     counter++;
-//   }
-// }
-// catch {
-
-// }
-// let head = randomCache.linkedList.getHead();
-
-// console.log('-----------------------');
-// randomCache.setElement(4, 14);
-// while (head) {
-//   console.log(head.key);
-//   head = head.next;
-// }
-// console.log('-----------------------');
-// console.log(randomCache.setElement(5, 15));
-// console.log('-----------------------');
-// console.log(randomCache.setElement(6, 16));

@@ -107,6 +107,4 @@ describe("Testing random", () => {
     random.setElement(4, 'd');
     expect(() => random.getElement(1)).toThrow('item is not in the list');
   });
-
-
 });

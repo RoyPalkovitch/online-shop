@@ -66,7 +66,7 @@ describe("Testing lru", () => {
     lru.setElement(3, 'c');
     expect(lru.removeElement(2)).toBe(true);
   });
-  test("lru - setElement - max capacity head algo removal", () => {
+  test("lru - setElement - max capacity tail algo removal", () => {
     const lru = new LRUCache<Number, String>(3);
     lru.setElement(1, 'a');
     lru.setElement(2, 'b');
