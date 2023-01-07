@@ -5,10 +5,6 @@ import { LinkedNode } from "../LinkedList/Node";
 
 export class FIFOcache<K, V> extends AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V> {
 
-    constructor(maxCapacity: number) {
-        super(maxCapacity);
-    }
-
     maxCapLogic(): void {
         const head = this.linkedList.getHead();
         this.removeElement(head.key);

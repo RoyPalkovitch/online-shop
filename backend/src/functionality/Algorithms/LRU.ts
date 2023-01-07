@@ -2,9 +2,7 @@ import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
 import { LinkedNode } from "../LinkedList/Node";
 
 export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
-  constructor(maxCap: number) {
-    super(maxCap);
-  }
+
   maxCapLogic(): void {
     this.removeElement(this.linkedList.getTail().key);
   };
@@ -12,8 +10,6 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
   pushToCorrectPlace(node: LinkedNode<K, V>): void {
     this.linkedList.addToHead(node);
   };
-
-
 
   getElement(key: K): V {
     if (!this.linkedList) {

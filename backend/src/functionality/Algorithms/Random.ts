@@ -7,8 +7,8 @@ export class RandomCache<K, V> extends AbstractCacheAlgo<K, V>{
     this.linkedList.addLinkedNode(node);
   }
   maxCapLogic() {
-    const keys = Array.from(this.linkedList.nodesDict.keys())
-    const rand = Math.floor(Math.random() * this.linkedList.length);
+    const keys = this.linkedList.getKeys();
+    const rand = Math.floor(Math.random() * this.linkedList.getLength());
     const randKey = keys[rand];
     this.removeElement(randKey)
   }

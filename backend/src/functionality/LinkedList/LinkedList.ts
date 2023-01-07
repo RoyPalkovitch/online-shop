@@ -1,12 +1,11 @@
-import { link } from "fs";
 import { LinkedNode } from "./Node";
 
 
 export class LinkedList<K, V> {
   private head: LinkedNode<K, V>;
   private tail: LinkedNode<K, V>;
-  nodesDict = new Map<K, LinkedNode<K, V>>();
-  length: number;
+  private nodesDict = new Map<K, LinkedNode<K, V>>();
+  private length: number;
 
   constructor(head: LinkedNode<K, V>) {
     this.head = head;
@@ -21,6 +20,10 @@ export class LinkedList<K, V> {
       throw Error('list got not head');
     }
     return this.head;
+  }
+
+  getKeys(): K[] {
+    return Array.from(this.nodesDict.keys());
   }
 
   getTail(): LinkedNode<K, V> {
@@ -39,6 +42,10 @@ export class LinkedList<K, V> {
       throw Error('Key does not exist in cache');
     }
     return getNode
+  }
+
+  getLength(): number {
+    return this.length;
   }
 
   addToHead(linkedNode: LinkedNode<K, V>): void {
@@ -112,61 +119,3 @@ export class LinkedList<K, V> {
   }
 
 }
-
-
-// const node_1 = new LinkedNode<number, number>(1, 10);
-// const node_2 = new LinkedNode<number, number>(2, 11);
-// const node_3 = new LinkedNode<number, number>(3, 12);
-// const node_4 = new LinkedNode<number, number>(4, 13);
-// const node_5 = new LinkedNode<number, number>(5, 14);
-// const node_6 = new LinkedNode<number, number>(6, 17);
-
-// const linked = new LinkedList(node_1);
-// linked.addLinkedNode(node_2);
-// linked.addLinkedNode(node_3);
-// linked.addLinkedNode(node_4);
-// linked.addLinkedNode(node_5);
-
-// let counter = 1;
-// while (linked.getLinkedNode(counter)) {
-//   console.log(linked.getLinkedNode(counter).data);
-//   counter++;
-// }
-// console.log('-----------------------');
-
-// console.log(node_5.key);
-
-// console.log('-----------------------');
-
-// linked.addToHead(node_6);
-// linked.addToHead(node_5);
-// console.log(node_6.key);
-// console.log(node_5.key);
-
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_3));
-// console.log(linked.getHead().key);
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_6));
-// console.log(linked.getHead().key);
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_1));
-// console.log(linked.getHead().key);
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_5));
-// console.log(linked.getHead().key);
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_2));
-// console.log(linked.getHead().key);
-// console.log('-----------------------');
-// console.log(linked.removeLinkedNode(node_4));
-// console.log(linked.length);
-//console.log(linked.getHead().key);
-
-// counter = 1;
-// while (linked.getLinkedNode(counter)) {
-//   console.log(linked.getLinkedNode(counter).data);
-//   counter++;
-// }
-
-

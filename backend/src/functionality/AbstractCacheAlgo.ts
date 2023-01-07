@@ -9,7 +9,6 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
   protected abstract maxCapLogic(): void;
   protected abstract pushToCorrectPlace(node: LinkedNode<K, V>): void;
 
-
   constructor(maxCap: number) {
     this.maxCapacity = maxCap;
   }
@@ -27,7 +26,7 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
       this.linkedList = new LinkedList(node);
       return key;
     }
-    if (this.maxCapacity < this.linkedList.length + 1) {
+    if (this.maxCapacity < this.linkedList.getLength() + 1) {
       this.maxCapLogic();
     }
     this.pushToCorrectPlace(node);
