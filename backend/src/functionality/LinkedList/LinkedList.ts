@@ -32,11 +32,11 @@ export class LinkedList<K, V> {
 
   getLinkedNode(key: K): LinkedNode<K, V> {
     if (this.length === 0) {
-      throw Error('list got not items');
+      throw Error('Cache is empty');
     }
     const getNode = this.nodesDict.get(key);
     if (!getNode) {
-      throw Error('item is not in the list');
+      throw Error('Key does not exist in cache');
     }
     return getNode
   }
@@ -74,6 +74,10 @@ export class LinkedList<K, V> {
     if (this.length === 0) {
       throw Error('no more nodes to remove');
     }
+    if (!this.nodesDict.has(linkedNode.key)) {
+      throw Error('Key does not exist in cache');
+    }
+
     if (linkedNode.parentRef !== this) {
       return false;
     }

@@ -2,10 +2,7 @@ import { LinkedNode } from "../LinkedList/Node";
 import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
 
 export class RandomCache<K, V> extends AbstractCacheAlgo<K, V>{
-  setElement(key: K, value: V): K {
-    super.setElement(key, value);
-    return key;
-  }
+
   pushToCorrectPlace(node: LinkedNode<K, V>): void {
     this.linkedList.addLinkedNode(node);
   }

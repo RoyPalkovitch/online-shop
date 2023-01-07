@@ -13,11 +13,9 @@ export class FIFOcache<K, V> extends AbstractCacheAlgo<K, V> implements ICacheAl
         const head = this.linkedList.getHead();
         this.removeElement(head.key);
     };
+
     pushToCorrectPlace(node: LinkedNode<K, V>): void {
         this.linkedList.addLinkedNode(node);
     }
-    setElement(key: K, value: V): K {
-        super.setElement(key, value);
-        return key;
-    }
+
 }
