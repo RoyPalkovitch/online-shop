@@ -6,7 +6,6 @@ export class LinkedList<K, V> {
   private tail: LinkedNode<K, V>;
   private nodesDict = new Map<K, LinkedNode<K, V>>();
   private length: number;
-
   constructor(head: LinkedNode<K, V>) {
     this.head = head;
     this.tail = head;

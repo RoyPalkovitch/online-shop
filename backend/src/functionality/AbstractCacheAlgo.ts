@@ -5,7 +5,7 @@ import { LinkedNode } from "./LinkedList/Node";
 export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
 
   protected linkedList: LinkedList<K, V>;
-  protected maxCapacity: number;
+  private maxCapacity: number;
   protected abstract maxCapLogic(): void;
   protected abstract pushToCorrectPlace(node: LinkedNode<K, V>): void;
 
@@ -17,6 +17,7 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
     if (!this.linkedList) {
       throw Error('Please set cache before using get');
     }
+
     return this.linkedList.getLinkedNode(key).data;
   }
 

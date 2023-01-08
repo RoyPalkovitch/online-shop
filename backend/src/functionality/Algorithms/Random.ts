@@ -10,6 +10,6 @@ export class RandomCache<K, V> extends AbstractCacheAlgo<K, V>{
     const keys = this.linkedList.getKeys();
     const rand = Math.floor(Math.random() * this.linkedList.getLength());
     const randKey = keys[rand];
-    this.removeElement(randKey)
+    super.removeElement(randKey)
   }
 }
