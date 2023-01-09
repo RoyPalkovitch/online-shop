@@ -5,10 +5,9 @@ import { LinkedNode } from "./LinkedList/Node";
 export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
 
   protected linkedList: LinkedList<K, V>;
-  protected maxCapacity: number;
+  private maxCapacity: number;
   protected abstract maxCapLogic(): void;
   protected abstract pushToCorrectPlace(node: LinkedNode<K, V>): void;
-
 
   constructor(maxCap: number) {
     this.maxCapacity = maxCap;
@@ -18,6 +17,7 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
     if (!this.linkedList) {
       throw Error('Please set cache before using get');
     }
+
     return this.linkedList.getLinkedNode(key).data;
   }
 
@@ -27,19 +27,18 @@ export abstract class AbstractCacheAlgo<K, V> implements ICacheAlgo<K, V>{
       this.linkedList = new LinkedList(node);
       return key;
     }
-    if (this.maxCapacity < this.linkedList.length + 1) {
+    if (this.maxCapacity < this.linkedList.getLength() + 1) {
       this.maxCapLogic();
     }
     this.pushToCorrectPlace(node);
+    return key;
   }
 
   removeElement(key: K): boolean {
     if (!this.linkedList) {
       throw Error('Please set cache before using remove');
     }
-    if (!this.linkedList.nodesDict.has(key)) {
-      throw Error('Key does not exist in cache');
-    }
+
     const nodeToRemove = this.linkedList.getLinkedNode(key);
     return this.linkedList.removeLinkedNode(nodeToRemove)
   }

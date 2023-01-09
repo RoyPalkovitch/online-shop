@@ -14,7 +14,7 @@ describe("Testing random", () => {
   test("random - getElement - key does not exist in cache", () => {
     const random = new RandomCache<Number, String>(3);
     random.setElement(1, 'a');
-    expect(() => random.getElement(2)).toThrow('item is not in the list');
+    expect(() => random.getElement(2)).toThrow('Key does not exist in cache');
   });
   test("random - setElement - same key twice in a row", () => {
     const random = new RandomCache<Number, String>(3);
@@ -27,7 +27,7 @@ describe("Testing random", () => {
     random.setElement(1, 'a');
     random.setElement(1, 'b');
     random.removeElement(1);
-    expect(() => random.getElement(1)).toThrow('item is not in the list');
+    expect(() => random.getElement(1)).toThrow('Key does not exist in cache');
     expect(() => random.removeElement(1)).toThrow('Key does not exist in cache');
   });
   test("random - removeElement - single item in cache", () => {
@@ -43,7 +43,7 @@ describe("Testing random", () => {
     const random = new RandomCache<Number, String>(3);
     random.setElement(1, 'a');
     random.removeElement(1);
-    expect(() => random.removeElement(1)).toThrow('Key does not exist in cache');
+    expect(() => random.removeElement(1)).toThrow('Cache is empty');
   });
   test("random - removeElement - from the head", () => {
     const random = new RandomCache<Number, String>(3);
@@ -73,7 +73,7 @@ describe("Testing random", () => {
     random.setElement(2, 'b');
     random.setElement(3, 'c');
     random.setElement(4, 'd');
-    expect(() => random.getElement(1)).toThrow('item is not in the list');
+    expect(() => random.getElement(1)).toThrow('Key does not exist in cache');
   });
 
   test("random - setElement - max capacity -> removeElement -> getElement", () => {
@@ -105,6 +105,6 @@ describe("Testing random", () => {
     random.setElement(3, 'c');
     random.getElement(1);
     random.setElement(4, 'd');
-    expect(() => random.getElement(1)).toThrow('item is not in the list');
+    expect(() => random.getElement(1)).toThrow('Key does not exist in cache');
   });
 });

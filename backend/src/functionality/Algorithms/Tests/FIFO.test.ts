@@ -3,7 +3,7 @@ import { FIFOcache } from "../Fifo";
 describe("Testing FIFO", () => {
     test("FIFO - getElement from an empty cache", () => {
         const fifo = new FIFOcache<Number, Number>(3);
-        expect(() =>fifo.getElement(1)).toThrow('Please set cache before using get');
+        expect(() => fifo.getElement(1)).toThrow('Please set cache before using get');
     });
     test("FIFO - setElement and getElement", () => {
         const fifo = new FIFOcache<Number, String>(3);
@@ -13,7 +13,7 @@ describe("Testing FIFO", () => {
     test("FIFO - getElement - key does not exist in cache", () => {
         const fifo = new FIFOcache<Number, String>(3);
         fifo.setElement(1, 'a');
-        expect(() =>fifo.getElement(2)).toThrow('item is not in the list');
+        expect(() => fifo.getElement(2)).toThrow('Key does not exist in cache');
     });
     test("FIFO - setElement - same key twice in a row", () => {
         const fifo = new FIFOcache<Number, String>(3);
@@ -26,8 +26,8 @@ describe("Testing FIFO", () => {
         fifo.setElement(1, 'a');
         fifo.setElement(1, 'b');
         fifo.removeElement(1);
-        expect(() =>fifo.getElement(1)).toThrow('item is not in the list');
-        expect(() =>fifo.removeElement(1)).toThrow('Key does not exist in cache');
+        expect(() => fifo.getElement(1)).toThrow('Key does not exist in cache');
+        expect(() => fifo.removeElement(1)).toThrow('Key does not exist in cache');
     });
     test("FIFO - removeElement - single item in cache", () => {
         const fifo = new FIFOcache<Number, String>(3);
@@ -36,13 +36,13 @@ describe("Testing FIFO", () => {
     });
     test("FIFO - removeElement - from none existing list/empty cache", () => {
         const fifo = new FIFOcache<Number, String>(3);
-        expect(() =>fifo.removeElement(1)).toThrow('Please set cache before using remove');
+        expect(() => fifo.removeElement(1)).toThrow('Please set cache before using remove');
     });
     test("FIFO - removeElement - twice in a row", () => {
         const fifo = new FIFOcache<Number, String>(3);
         fifo.setElement(1, 'a');
         fifo.removeElement(1);
-        expect(() =>fifo.removeElement(1)).toThrow('Key does not exist in cache');
+        expect(() => fifo.removeElement(1)).toThrow('Cache is empty');
     });
     test("FIFO - removeElement - from the head", () => {
         const fifo = new FIFOcache<Number, String>(3);
@@ -71,7 +71,7 @@ describe("Testing FIFO", () => {
         fifo.setElement(2, 'b');
         fifo.setElement(3, 'c');
         fifo.setElement(4, 'd');
-        expect(() => fifo.getElement(1)).toThrow('item is not in the list');
+        expect(() => fifo.getElement(1)).toThrow('Key does not exist in cache');
     });
 
     test("FIFO - setElement - max capacity -> removeElement", () => {

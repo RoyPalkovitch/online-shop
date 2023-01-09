@@ -2,20 +2,13 @@ import { AbstractCacheAlgo } from "../AbstractCacheAlgo";
 import { LinkedNode } from "../LinkedList/Node";
 
 export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
-  constructor(maxCap: number) {
-    super(maxCap);
-  }
+
   maxCapLogic(): void {
-    this.removeElement(this.linkedList.getTail().key);
+    super.removeElement(this.linkedList.getTail().key);
   };
 
   pushToCorrectPlace(node: LinkedNode<K, V>): void {
     this.linkedList.addToHead(node);
-  };
-
-  setElement(key: K, value: V): K {
-    super.setElement(key, value);
-    return key;
   };
 
   getElement(key: K): V {
@@ -23,9 +16,7 @@ export class LRUCache<K, V> extends AbstractCacheAlgo<K, V>{
       throw Error('Please set cache before using get');
     }
     const getNode = this.linkedList.getLinkedNode(key);
-    if (!getNode) {
-      return;
-    }
+
     if (getNode !== this.linkedList.getHead()) {
       this.linkedList.addToHead(getNode);
     }
