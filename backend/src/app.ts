@@ -1,12 +1,14 @@
-import express, { Express, Request, Response } from 'express';
-import yargs from 'yargs/yargs';
 import cors from 'cors'
-import { AbstractCacheAlgo } from 'functionality/AbstractCacheAlgo';
+import express from 'express';
+import yargs from 'yargs/yargs';
+import { User } from './dao/User';
+import { UsersDao } from './dao/UserDao';
+import { ClientCode } from './CacheFactory';
+import { UsersService } from './services/UserService';
+import { UsersController } from './contoller/UserController';
+import { AbstractCacheAlgo } from './functionality/AbstractCacheAlgo';
 
-
-
-const server = express();
-const port = 9000;
+export const server = express();
 
 server.use(cors());
 server.use(express.json());
@@ -25,7 +27,11 @@ const yargsArgv = yargs(process.argv.slice(2)).command('algo', 'Run server with 
   .help()
   .parseSync();
 
-let algoStr = yargsArgv.algo;
+let algoStr = <string | undefined>yargsArgv.algo;
 let capacity = <number>yargsArgv.capacity;
 
-//let cacheAlgo: AbstractCacheAlgo<number,User> = undefined;
+let cacheAlgo: AbstractCacheAlgo<number, User> = ClientCode(algoStr, capacity);
+
+const userController = new UsersController(server,
+  new UsersService(cacheAlgo, new UsersDao()));
+

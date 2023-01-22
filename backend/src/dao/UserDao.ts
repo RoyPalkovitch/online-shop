@@ -1,11 +1,11 @@
 import { Client, QueryResult } from "pg";
-import { createConnection } from "./config.js";
-import { CrudDao } from "./Dao.js"
-import { User } from "./user.js"
+import { createConnection } from "./Config";
+import { CrudDao } from "./Dao";
+import { User } from "./User";
 
 class UsersDao extends CrudDao<User>{
 
-  client: Client;
+  private client: Client;
   constructor() {
     super();
     this.client = createConnection();
