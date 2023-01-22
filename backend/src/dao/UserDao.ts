@@ -1,7 +1,7 @@
 import { Client, QueryResult } from "pg";
-import { createConnection } from "./Config";
+import { createConnection } from "./config";
 import { CrudDao } from "./Dao";
-import { User } from "./User";
+import { User } from "./user";
 
 class UsersDao extends CrudDao<User>{
 
