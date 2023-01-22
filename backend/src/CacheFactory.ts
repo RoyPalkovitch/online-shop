@@ -1,4 +1,3 @@
-import { User } from "dao/User";
 import { AbstractCacheAlgo } from "functionality/AbstractCacheAlgo";
 import { FIFOcache } from "functionality/Algorithms/Fifo";
 import { LRUCache } from "functionality/Algorithms/LRU";
@@ -29,13 +28,13 @@ class LRUCacheCreator<K, V> extends CacheCreator<K, V> {
   }
 }
 
-export function ClientCode(clientString: string, capacity: number) {
+export function ClientCode<K, V>(clientString: string, capacity: number) {
   if (clientString === 'random') {
-    return new RandomCache<number, User>(capacity);
+    return new FifoCacheCreator<K, V>();
   } else if (clientString === 'fifo') {
-    return new FIFOcache<number, User>(capacity);
+    return new RandomCacheCreator<K, V>();
   } else if (clientString === 'lru') {
-    return new LRUCache<number, User>(capacity);
+    return new LRUCacheCreator<K, V>();
   } else {
     throw ("Can't find cache type");
   }

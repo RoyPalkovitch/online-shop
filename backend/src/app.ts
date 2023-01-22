@@ -1,12 +1,11 @@
 import cors from 'cors'
 import express from 'express';
 import yargs from 'yargs/yargs';
-import { User } from './dao/User';
 import { UsersDao } from './dao/UserDao';
 import { ClientCode } from './CacheFactory';
 import { UsersService } from './services/UserService';
 import { UsersController } from './contoller/UserController';
-import { AbstractCacheAlgo } from './functionality/AbstractCacheAlgo';
+import { User } from 'dao/User';
 
 export const server = express();
 
@@ -30,8 +29,14 @@ const yargsArgv = yargs(process.argv.slice(2)).command('algo', 'Run server with 
 let algoStr = <string | undefined>yargsArgv.algo;
 let capacity = <number>yargsArgv.capacity;
 
-let cacheAlgo: AbstractCacheAlgo<number, User> = ClientCode(algoStr, capacity);
 
-const userController = new UsersController(server,
-  new UsersService(cacheAlgo, new UsersDao()));
+const createUserController = () => {
+  const cacheAlgo = ClientCode<number, User>(algoStr, capacity);
+  return new UsersController(server,
+    new UsersService(cacheAlgo.createCache(capacity), new UsersDao()))
+};
+
+const userController = createUserController();
+
+
 
