@@ -2,7 +2,7 @@ import cors from 'cors'
 import express from 'express';
 import yargs from 'yargs/yargs';
 import { UsersDao } from './dao/UserDao';
-import { ClientCode } from './CacheFactory';
+import { ClientCode } from './functionality/CacheFactory';
 import { UsersService } from './services/UserService';
 import { UsersController } from './contoller/UserController';
 import { User } from 'dao/User';
